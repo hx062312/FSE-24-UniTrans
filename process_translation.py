@@ -1,3 +1,6 @@
+# python process_translation.py --src_lang ${src_lang} --dst_lang ${dst_lang} --suffix ${suffix}
+# python process_translation.py --src_lang python --dst_lang cpp --suffix _w_10cases_2round
+# python process_translation.py --src_lang cpp --dst_lang python --suffix _w_10cases_2round
 import json
 import re
 import jsonlines
@@ -5,7 +8,7 @@ import os
 import ast
 from tqdm import tqdm
 import argparse
-
+from config import ensure_dir_exists
 
 def extract_data(mode):
     with open(f"./evaluation_transcoder/transcoder_{mode}.cpp.detok", encoding="utf-8") as fr:
@@ -46,7 +49,7 @@ def remove_comm(program):
 
 def post_process_python(model, file, suffix):
     all = []
-    with open(f"./cleaned_data/{model}/{file}", encoding="utf-8") as fr:
+    with open(f"./cleaned_data/{model}/org_sol/{file}", encoding="utf-8") as fr:
         for item in fr.readlines():
             item = json.loads(item)
             # if item['id'] != "POSITIVE_ELEMENTS_EVEN_NEGATIVE_ODD_POSITIONS":
@@ -88,12 +91,12 @@ def post_process_python(model, file, suffix):
                 # assert False
                 new_sample_lst.append(new_sample)
             all.append({"id":item["id"], "python": new_sample_lst})
-    with jsonlines.open(f"./cleaned_data/{model}/post_processed{suffix}/{file}", "w") as fw:
+    with jsonlines.open(f"./cleaned_data/{model}/post_processed/{file}", "w") as fw:
         fw.write_all(all)
 
 def post_process_java(model, file, suffix):
     all = []
-    with open(f"./cleaned_data/{model}/{file}", encoding="utf-8") as fr:
+    with open(f"./cleaned_data/{model}/org_sol/{file}", encoding="utf-8") as fr:
         for item in fr.readlines():
             item = json.loads(item)
             sample_lst = item["java"]
@@ -129,12 +132,12 @@ def post_process_java(model, file, suffix):
                 # if new_sample != "":
                 new_sample_lst.append(new_sample)
             all.append({"id": item["id"], "java": new_sample_lst})
-    with jsonlines.open(f"./cleaned_data/{model}/post_processed{suffix}/{file}", "w") as fw:
+    with jsonlines.open(f"./cleaned_data/{model}/post_processed/{file}", "w") as fw:
         fw.write_all(all)
 
 def post_process_cpp(model, file, suffix):
     all = []
-    with open(f"./cleaned_data/{model}/{file}", encoding="utf-8") as fr:
+    with open(f"./cleaned_data/{model}/org_sol/{file}", encoding="utf-8") as fr:
         for item in fr.readlines():
             item = json.loads(item)
             id = item['id']
@@ -173,7 +176,7 @@ def post_process_cpp(model, file, suffix):
                 # if new_sample != "":
                 new_sample_lst.append(new_sample)
             all.append({"id": item["id"], "cpp": new_sample_lst})
-    with jsonlines.open(f"./cleaned_data/{model}/post_processed{suffix}/{file}", "w") as fw:
+    with jsonlines.open(f"./cleaned_data/{model}/post_processed/{file}", "w") as fw:
         fw.write_all(all)
 
 def locate_function_name_py(code):
@@ -205,9 +208,10 @@ def formulate_scripts(model, src_lang, dst_lang, file, suffix):
     # formulate a series of test scripts for evaluation preparation.
     count = 0
     script_lst = [i.split(".")[0] for i in os.listdir(f"./cleaned_data/transcoder_evaluation_gfg/{dst_lang}")]
-    with open(f"./cleaned_data/{model}/post_processed{suffix}/{file}", encoding="utf-8") as fr:
+    with open(f"./cleaned_data/{model}/post_processed/{file}", encoding="utf-8") as fr:
         for line in tqdm(fr.readlines()):
             line = json.loads(line)
+            # 原来是 sample_lst = line[dst_lang]
             sample_lst = line[dst_lang]
             sample_id = line['id']
             if sample_id in script_lst:
@@ -270,10 +274,10 @@ def formulate_scripts(model, src_lang, dst_lang, file, suffix):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="model name", default="llama-7b-hf")
+    parser.add_argument("--model", type=str, help="model name", default="deepseek")
     parser.add_argument("--src_lang", type=str, help="source language", default="java")
     parser.add_argument("--dst_lang", type=str, help="target language", default="python")
-    parser.add_argument("--suffix", type=int, help="append test case and repair round info", default="")
+    parser.add_argument("--suffix", type=str, help="append test case and repair round info", default="")
     args = parser.parse_args()
 
     model = args.model
@@ -281,6 +285,10 @@ if __name__ == "__main__":
     dst_lang = args.dst_lang
     suffix = args.suffix
     raw_file = f"testable_{src_lang}_{dst_lang}{suffix}.jsonl"
+
+    if not os.path.exists(f"./cleaned_data/{model}/post_processed"):
+        os.makedirs(f"./cleaned_data/{model}/post_processed")
+
     if dst_lang == "python":
         post_process_python(model, raw_file, suffix)
         formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
@@ -296,3 +304,32 @@ if __name__ == "__main__":
         assert False, "unknown lang!"
 
 
+    # raw_file = f"testable_{src_lang}_{dst_lang}{suffix}.jsonl"
+    # if dst_lang == "python":
+    #     post_process_python(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif dst_lang == "java":
+    #     post_process_java(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif dst_lang == "cpp":
+    #     post_process_cpp(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif dst_lang == "c#":
+    #     pass
+    # else:
+    #     assert False, "unknown lang!"
+    # 改成
+        # raw_file = f"testable_{src_lang}_{dst_lang}{suffix}.jsonl"
+    # if src_lang == "python":
+    #     post_process_python(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif src_lang == "java":
+    #     post_process_java(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif src_lang == "cpp":
+    #     post_process_cpp(model, raw_file, suffix)
+    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
+    # elif src_lang == "c#":
+    #     pass
+    # else:
+    #     assert False, "unknown lang!"

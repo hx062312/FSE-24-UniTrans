@@ -1,7 +1,10 @@
+# python fetch_feedbacks.py --model ${model_name} --src_lang ${src_lang} --dst_lang ${dst_lang} 
+# python fetch_feedbacks.py --model deepseek --src_lang python --dst_lang cpp 
+# python fetch_feedbacks.py --model deepseek --src_lang cpp --dst_lang python
 import json
 import os
 import re
-from process_transcoder import locate_function_name_py
+from process_translation import locate_function_name_py
 import signal
 from process_valid_inputs import TimeoutHandler, run_cmd, locate_params_py, \
     refine_code_py, locate_function_name_java, refine_code_ja, has_array, \
@@ -511,7 +514,7 @@ def fetch_exe_ret_cp(target_file, out_file, test_case_file, test_case_num, timeo
                     print("runtime error")
             if sub_correct == len(test_cases):
                 correct += 1
-            with jsonlines.open(out_file, "a") as fw:
+            with jsonlines.open(out_file, "w") as fw:
                 fw.write({"id": id, "feedbacks": cases_errs})
     print(f"pass rate: {correct / count}, {correct}, {count}")
 
@@ -521,7 +524,7 @@ if __name__ == "__main__":
     parser.add_argument("--start", type=int, help="start point", default=1)
     parser.add_argument("--src_lang", type=str, help="source language", default="python")
     parser.add_argument("--dst_lang", type=str, help="target language", default="java")
-    parser.add_argument("--test_case_num", type=int, help="num of test cases", default=3)
+    parser.add_argument("--test_case_num", type=int, help="num of test cases", default=10)
     parser.add_argument("--round", type=int, help="number of round", default=2)
     args = parser.parse_args()
 

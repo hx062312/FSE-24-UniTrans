@@ -1,9 +1,11 @@
-
-
-
+# python process_valid_inputs.py --model ${model_name} --dst_lang ${src_lang}
+# python process_valid_inputs.py --model deepseek --src_lang python
+# python process_valid_inputs.py --model deepseek --src_lang cpp --dst_lang python
+# python process_valid_inputs.py --model deepseek --src_lang python --dst_lang java
+# python process_valid_inputs.py --model deepseek --src_lang java --dst_lang cpp
 import json
 import re
-from process_transcoder import locate_function_name_py
+from process_translation import locate_function_name_py
 import os
 from tqdm import tqdm
 import jsonlines
@@ -28,7 +30,7 @@ def refine_code_py(code):
     code = pattern.sub("pass\n", code)
     return code
 
-def post_process_py(model, keep_all, timeout=5, start=1):
+def post_process_py(model, keep_all, dst_lang, timeout=5, start=1):
     # script_lst = os.listdir("./cleaned_data/transcoder_evaluation_gfg/python")
     count = 0
     with open(f"./cleaned_data/{model}/valid_inputs/valid_inputs_python.jsonl", encoding="utf-8") as fr:
@@ -44,9 +46,9 @@ def post_process_py(model, keep_all, timeout=5, start=1):
             item = line['python']
             item_case_lst = []
             for item_i in item:
-                if model != "gpt3_5":
+                if model != "deepseek":
                     # item_i = item_i.replace(example_python, "").replace(valid_inputs_python, "")
-                    item_i = item_i.split("END_OF_CASE\n")[1]
+                    # item_i = item_i.split("END_OF_CASE\n")[1]
                     found = re.findall(r"Input_\d+:.+", item_i, flags=re.S)
                     if len(found) != 0:
                         item_i = found[0]
@@ -152,10 +154,10 @@ def post_process_py(model, keep_all, timeout=5, start=1):
                         else:
                             item_case_lst.append(f"Inputs:\n{case_save}\nOutputs:\n{result}")
             if keep_all:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_python_keep_all.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}_keep_all.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": item_case_lst})
             else:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_python.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": list(set(item_case_lst))})
 
 def locate_function_name_java(code):
@@ -250,7 +252,7 @@ def run_cmd(cmd):
     return result.stdout.read().strip(), result.stderr.read().strip()
 
 # todo java/cpp not done
-def post_process_ja(model, keep_all, timeout=5, start=1):
+def post_process_ja(model, keep_all, dst_lang, timeout=5, start=1):
     # script_lst = os.listdir("./cleaned_data/transcoder_evaluation_gfg/java")
     count = 0
     with open(f"./cleaned_data/{model}/valid_inputs/valid_inputs_java.jsonl", encoding="utf-8") as fr:
@@ -268,7 +270,7 @@ def post_process_ja(model, keep_all, timeout=5, start=1):
             item_case_lst = []
             for item_i in item:
                 # todo deal with llm
-                if model != "gpt3_5":
+                if model != "deepseek":
                     # item_i = item_i.replace(example_java, "").replace(valid_inputs_java, "")
                     # print(item_i)
                     # assert False
@@ -377,14 +379,14 @@ def post_process_ja(model, keep_all, timeout=5, start=1):
                             item_case_lst.append(f"Inputs:\n{case_save}\nOutputs ({return_type}):\n{result}")
 
             if keep_all:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_java_keep_all.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}_keep_all.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": item_case_lst})
             else:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_java.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": list(set(item_case_lst))})
 
 
-def post_process_cp(model, keep_all, timeout=5, start=1):
+def post_process_cp(model, keep_all, dst_lang, timeout=5, start=1):
     # script_lst = os.listdir("./cleaned_data/transcoder_evaluation_gfg/cpp")
     count = 0
     # todo del
@@ -408,7 +410,7 @@ def post_process_cp(model, keep_all, timeout=5, start=1):
             item_case_lst = []
             for item_i in item:
                 # todo deal with llm
-                if model != "gpt3_5":
+                if model != "deepseek":
                     # item_i = item_i.replace(example_cpp, "").replace(valid_inputs_cpp, "")
                     item_i = item_i.split("END_OF_CASE\n")[1]
                     found = re.findall(r"Input_\d+:.+", item_i, flags=re.S)
@@ -438,7 +440,7 @@ def post_process_cp(model, keep_all, timeout=5, start=1):
                     elif has_array(return_type):
                         params = ",".join(var_lst)
                         NEW_LINE = "\'\\n\'"
-                        script_case = f"try {{\n{case_save}{return_type} output = {func_name}({params});\n" \
+                        script_case = f"try \n{case_save}{return_type} output = {func_name}({params});\n" \
                                       f"while(*output){{\ncout << *output << {NEW_LINE};\noutput++;}}\n" \
                                       + "}catch(...){cout <<\"exception\";}\n"
                     else:
@@ -520,26 +522,39 @@ def post_process_cp(model, keep_all, timeout=5, start=1):
                             item_case_lst.append(f"Inputs:\n{case_save}\nOutputs ({return_type}):\n{result}")
 
             if keep_all:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_cpp_keep_all.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}_keep_all.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": item_case_lst})
             else:
-                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_cpp.jsonl", "a") as fw:
+                with jsonlines.open(f"./cleaned_data/{model}/test_cases/test_cases_{dst_lang}.jsonl", "w") as fw:
                     fw.write({"id": id, "test_case": list(set(item_case_lst))})
+
+def process_valid_inputs(model, src_lang, dst_lang, start=1, keep_all=False):
+    """Process valid inputs for the specified language and model.
+    
+    Args:
+        model (str): The model name to use.
+        start (int): The starting point for processing.
+        src_lang (str): The source language (python, java, or cpp).
+        keep_all (bool): Whether to keep all correct/incorrect cases.
+    """
+    if src_lang == "python":
+        post_process_py(model=model, dst_lang=dst_lang, start=start, keep_all=keep_all)
+    elif src_lang == "java":
+        post_process_ja(model=model, dst_lang=dst_lang, start=start, keep_all=keep_all)
+    elif src_lang == "cpp":
+        post_process_cp(model=model, dst_lang=dst_lang, start=start, keep_all=keep_all)
+    else:
+        print("Unknown language!")
+        exit(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="model name", default="llama-7b-hf")
+    parser.add_argument("--model", type=str, help="model name", default="deepseek")
     parser.add_argument("--start", type=int, help="start point", default=1)
-    parser.add_argument("--dst_lang", type=str, help="target language", default="python")
+    parser.add_argument("--src_lang", type=str, help="source language", default="python")
+    parser.add_argument("--dst_lang", type=str, help="target language", default="cpp")
     parser.add_argument("--keep_all", type=bool, help="keep all correct/incorrect cases", default=False)
     args = parser.parse_args()
-    if args.dst_lang == "python":
-        post_process_py(model=args.model, start=args.start, keep_all=args.keep_all)
-    elif args.dst_lang == "java":
-        post_process_ja(model=args.model, start=args.start, keep_all=args.keep_all)
-    elif args.dst_lang == "cpp":
-        post_process_cp(model=args.model, start=args.start, keep_all=args.keep_all)
-    else:
-        print("unknown lang!")
+    process_valid_inputs(model=args.model, src_lang=args.src_lang, dst_lang=args.dst_lang,start=args.start,keep_all=args.keep_all)
 
 
