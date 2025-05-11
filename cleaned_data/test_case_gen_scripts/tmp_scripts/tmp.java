@@ -1,39 +1,36 @@
-import java.util.*;
+import java.util. *;
 import java.util.stream.*;
 import java.lang.*;
 public class BASIC_AND_EXTENDED_EUCLIDEAN_ALGORITHMS{
 
 
-static int addOne(int x) {
-    int m = 1;
-    while ((x & m) != 0) {
-        x = x ^ m;
-        m <<= 1;
-    }
-    x = x ^ m;
-    return x;
+static double largestSumOfAverages(int[] A, int K) {
+    int n = A.length;
+    double[] pre_sum = new double[n + 1];
+    pre_sum[0] = 0;
+    for (int i = 0; i < n; i++)
+        pre_sum[i + 1] = pre_sum[i] + A[i];
+    
+    double[] dp = new double[n];
+    for (int i = 0; i < n; i++)
+        dp[i] = (pre_sum[n] - pre_sum[i]) / (n - i);
+    
+    for (int k = 0; k < K - 1; k++)
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                dp[i] = Math.max(dp[i], (pre_sum[j] - pre_sum[i]) / (j - i) + dp[j]);
+    
+    return dp[0];
 }
 
 
 public static void main(String args[]) {
-    try{
+    try {
+int[] A = {10, 20, 30, 40, 50};
+int K = 2;
+System.out.println(largestSumOfAverages(A,K));
+}catch(Exception e){System.out.println("exception");}
 
-        int exp_out = 6;
 
-        int x=5;
-
-        int act_out = addOne(x);
-
-        if(act_out == exp_out) System.out.println("OK");
-
-        else {
-System.out.print("Expected Output:6\nActual Output:");
-System.out.print(act_out);
-System.out.print("\nExpected output and actual output are not equal!");}
-
-    }catch(Exception e){
-        System.out.print("Runtime Error:");
-        e.printStackTrace();
-    }
 }
 }

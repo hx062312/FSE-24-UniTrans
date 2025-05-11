@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int arr [ ], int n ) {
   if ( n == 0 || n == 1 ) return true;

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int n ) {
   return 1162261467 % n == 0;

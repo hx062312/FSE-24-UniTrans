@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int a, int b, int m ) {
   int n = ( int ) sqrt ( m ) + 1;

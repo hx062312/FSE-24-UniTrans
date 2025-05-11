@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int W, int wt [ ], int val [ ], int n ) {
   if ( n == 0 || W == 0 ) return 0;

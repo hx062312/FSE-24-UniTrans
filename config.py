@@ -30,6 +30,7 @@ class Paths:
     ORG_SOL_DIR = os.path.join(OUTPUT_DIR, "org_sol")
     VALID_INPUTS_DIR = os.path.join(OUTPUT_DIR, "valid_inputs")
     FEEDBACK_DIR = os.path.join(OUTPUT_DIR, "feedbacks")
+    REPAIR_DIR = os.path.join(OUTPUT_DIR, "repair")
 
 # Obj 类定义
 class Obj(IntEnum):

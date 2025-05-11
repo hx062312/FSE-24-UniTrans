@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long f_gold ( int m, int n, int x ) {
   long table [ n + 1 ] [ x + 1 ];

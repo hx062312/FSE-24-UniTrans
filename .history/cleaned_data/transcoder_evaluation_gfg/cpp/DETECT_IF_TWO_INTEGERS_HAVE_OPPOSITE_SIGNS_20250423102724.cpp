@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int x, int y ) {
   return ( ( x ^ y ) < 0 );

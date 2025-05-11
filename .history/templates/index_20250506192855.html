@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNITRANS</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部翻译类型选项卡 -->
+        <div class="translation-types">
+            <div class="type-item active">
+                <div class="icon">📄</div>
+                <div class="type-info">
+                    <div class="type-title">生成测试用例</div>
+                    <div class="type-desc"></div>
+                </div>
+                <span class="type-help" title="通过LLM为源代码自动生成多样化的输入用例,并利用源代码执行这些输入来获取对应的输出,从而构建完整的测试用例集(输入-输出对)">❓</span>
+            </div>
+            <div class="type-item">
+                <div class="icon">📑</div>
+                <div class="type-info">
+                    <div class="type-title">翻译增强</div>
+                    <div class="type-desc"></div>
+                </div>
+                <span class="type-help" title="将生成的测试用例作为额外信息,指导LLM生成更准确的目标语言代码,确保翻译结果能通过测试用例验证">❓</span>
+            </div>
+            <div class="type-item">
+                <div class="icon">📝</div>
+                <div class="type-info">
+                    <div class="type-title">翻译修复</div>
+                    <div class="type-desc"></div>
+                </div>
+                <span class="type-help" title="对未通过测试的翻译程序,利用执行错误信息(如编译错误、运行时异常或输出不符)指导LLM迭代修复代码。">❓</span>
+            </div>
+            <!-- <div class="type-item">
+                <div class="icon">🖼️</div>
+                <div class="type-info">
+                    <div class="type-title">翻译图片</div>
+                    <div class="type-desc">检测图片中的内容</div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧输入区域 -->
+            <div class="input-section">
+                <div class="language-selector">
+                    <div class="source-language">
+                        <select name="source-lang" id="source-lang">
+                            <option value="cpp">C++</option>
+                            <option value="python" selected>Python</option>
+                            <option value="java">Java</option>
+                        </select>
+                    </div>
+                    <div class="swap-icon">↔</div>
+                    <div class="target-language">
+                        <select name="target-lang" id="target-lang">
+                            <option value="cpp" selected>C++</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                        </select>
+                    </div>
+                    <div class="input-actions">
+                        <button class="translate-btn">翻译</button>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <textarea placeholder="输入"></textarea>
+                </div>
+            </div>
+
+            <!-- 右侧翻译结果区域 -->
+            <div class="results-section">
+                <div class="language-selector">
+                    <div class="source-language">
+                        <select name="llm-model" id="llm-model">
+                            <option value="deepseek" selected>DeepSeek</option>
+                        </select>
+                    </div>
+                    <div class="input-actions">
+                        <button class="copy-btn">复制</button>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <textarea placeholder="输出" readonly></textarea>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 测试用例弹窗 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="reload">&#x21bb;</span>
+            <span class="next-step">&#8594;</span>
+            <span class="close">&#x2716;</span>
+            <div id="modal-message"></div>
+        </div>
+    </div>
+
+       <!-- 翻译结果弹窗 -->
+       <div id="translationModal" class="modal">
+        <div class="modal-content">
+            <span class="reload">&#x21bb;</span>
+            <span class="next-step">&#8594;</span>
+            <span class="close">&#x2716;</span>
+            <div class="display-section">
+                <h2>翻译结果:</h2>
+                <pre id="programCode" class="code-block"></pre>
+            </div>
+
+            <div class="display-section">
+                <h2>测试用例运行结果:</h2>
+                <div id="testCases" class="test-cases"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 翻译修复弹窗 -->
+    <div id="repairModal" class="modal">
+        <div class="modal-content">
+            <span class="reload">&#x21bb;</span>
+            <span class="next-step">&#8594;</span>
+            <span class="close">&#x2716;</span>
+            <div class="display-section">
+                <h2>翻译修复:</h2>
+                <pre id="repairProgramCode" class="code-block"></pre>
+            </div>
+            <div class="display-section">
+                <h2>测试用例运行结果:</h2>
+                <div id="testCases" class="test-cases"></div>
+            </div>
+            <div class="display-section">
+                <h2>调试信息:</h2>
+                <div id="repairTestCases" class="test-cases"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 加载动画 -->
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在处理...</div>
+    </div>
+    
+    <script src="../static/script.js"></script>
+</body>
+</html>

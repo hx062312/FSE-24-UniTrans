@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int arr [ ], int n ) {
   if ( n < 3 ) return - 1;

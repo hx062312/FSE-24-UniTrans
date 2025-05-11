@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int n, int i ) {
   if ( n <= 2 ) return ( n == 2 ) ? true : false;

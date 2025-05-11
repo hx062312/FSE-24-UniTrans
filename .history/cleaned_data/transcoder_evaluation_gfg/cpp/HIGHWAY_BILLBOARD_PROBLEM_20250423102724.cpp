@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int m, int x [ ], int revenue [ ], int n, int t ) {
   int maxRev [ m + 1 ];

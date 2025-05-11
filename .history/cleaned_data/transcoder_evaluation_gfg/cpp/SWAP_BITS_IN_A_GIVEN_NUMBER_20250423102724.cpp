@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( unsigned int x, unsigned int p1, unsigned int p2, unsigned int n ) {
   unsigned int set1 = ( x >> p1 ) & ( ( 1U << n ) - 1 );

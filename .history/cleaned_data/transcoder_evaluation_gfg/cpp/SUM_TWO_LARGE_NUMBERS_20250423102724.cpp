@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 string f_gold ( string str1, string str2 ) {
   if ( str1 . length ( ) > str2 . length ( ) ) swap ( str1, str2 );

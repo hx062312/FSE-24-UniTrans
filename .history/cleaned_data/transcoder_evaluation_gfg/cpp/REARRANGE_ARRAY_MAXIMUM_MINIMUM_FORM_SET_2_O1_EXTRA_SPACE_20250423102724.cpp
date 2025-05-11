@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 void f_gold ( int arr [ ], int n ) {
   int max_idx = n - 1, min_idx = 0;

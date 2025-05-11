@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( double h, double m ) {
   if ( h < 0 || m < 0 || h > 12 || m > 60 ) printf ( "Wrong input" );

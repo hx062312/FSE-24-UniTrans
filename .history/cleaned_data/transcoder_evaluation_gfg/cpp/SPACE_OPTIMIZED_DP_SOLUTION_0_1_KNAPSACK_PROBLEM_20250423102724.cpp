@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int val [ ], int wt [ ], int n, int W ) {
   int mat [ 2 ] [ W + 1 ];

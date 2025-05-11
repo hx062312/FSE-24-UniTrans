@@ -62,6 +62,25 @@ body {
     color: #666;
 }
 
+.type-help {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #333;
+    text-align: center;
+    line-height: 22px;
+    font-size: 16px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background 0.2s;
+}
+.type-help:hover {
+    background: #bdbdbd;
+}
+
 /* 主要内容区域 */
 .main-content {
     display: flex;
@@ -93,6 +112,21 @@ body {
     padding: 15px;
 }
 
+.input-area textarea {
+    flex: 1;
+    border: none;
+    resize: none;
+    font-size: 17px;
+    line-height: 1.8;
+    font-family: 'JetBrains Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+    outline: none;
+    margin-bottom: 15px;
+    min-height: 400px;
+    background-color: #fff;
+    color: #222;
+    /* 你可以根据需要调整颜色 */
+}
+
 textarea {
     flex: 1;
     border: none;
@@ -105,7 +139,12 @@ textarea {
 
 .input-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: right; /* 由flex-end改为center，实现按钮居中 */
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 /* 按钮样式 */
@@ -185,37 +224,151 @@ select#llm-model {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.45);
+    transition: background 0.2s;
 }
 
 .modal-content {
-    background-color: #f8f9fa;
-    margin: 10% auto;
-    border: 1px solid #ddd;
-    width: 80%;
-    max-width: 700px;
-    border-radius: 8px;
+    background: #fff;
+    margin: 8% auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    width: 90%;
+    max-width: 600px;
+    padding: 0;
+    overflow: hidden;
+    animation: modalFadeIn 0.3s;
+}
+
+#modal .modal-content {
     position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    max-height: 80vh;
-    overflow: auto;
+    overflow: visible;
+}
+
+@keyframes modalFadeIn {
+    from { transform: translateY(-40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-header {
-    background-color: #4a6fa5;
-    color: white;
-    padding: 15px 20px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    font-weight: 500;
-    font-size: 18px;
-    user-select: none;
+    color: #4a6fa5;
+    padding: 18px 28px;
+    font-size: 20px;
+    font-weight: 600;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    letter-spacing: 1px;
 }
+
+#editButton {
+    background: #4a6fa5;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(74,111,165,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+#editButton:hover {
+    background: #3a5a80;
+    box-shadow: 0 4px 16px rgba(74,111,165,0.12);
+}
+
+.test-cases {
+    padding: 24px 24px 8px 24px;
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.test-case {
+    margin-bottom: 18px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    background: #f9f9fb;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.05);
+    transition: box-shadow 0.2s;
+}
+
+.test-case strong {
+    display: block;
+    background: #f1f5fa;
+    color: #4a6fa5;
+    padding: 10px 18px;
+    font-size: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.test-case textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 14px 18px;
+    border: none;
+    resize: vertical;
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 15px;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.test-case textarea:focus {
+    background: #f0f6ff;
+}
+
+.modal-footer {
+    padding: 18px 28px;
+    text-align: right;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+#editButton {
+    background-color: #4a6fa5;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(74,111,165,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+#editButton:hover {
+    background: #4a6fa5;
+    box-shadow: 0 4px 16px rgba(74,111,165,0.12);
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 98%;
+        margin: 16% auto;
+        padding: 0;
+    }
+    .test-cases {
+        padding: 12px 6px 4px 6px;
+    }
+    .modal-header, .modal-footer {
+        padding: 12px 10px;
+        font-size: 16px;
+    }
+}
+
 
 .close {
     color: white;
@@ -225,6 +378,82 @@ select#llm-model {
     cursor: pointer;
     opacity: 0.8;
     margin-top: -5px;
+}
+
+#modal .modal-content {
+    width: 92%;
+    max-width: 900px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(74,111,165,0.18);
+    padding: 0;
+    overflow: visible;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#modal .close {
+    position: absolute;
+    right: 24px;
+    top: 22px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#modal .close:hover {
+    opacity: 1;
+}
+
+#modal .next-step {
+    position: absolute;
+    right: 104px; /* 放在 reload 左侧 */
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#modal .next-step:hover {
+    opacity: 1;
+    transform: translateX(4px);
+    transition: opacity 0.2s, transform 0.3s;
+}
+
+#modal .reload {
+    position: absolute;
+    right: 64px; /* 放在关闭按钮左侧 */
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#modal .reload:hover {
+    opacity: 1;
+    transform: rotate(180deg);
+    transition: opacity 0.2s, transform 0.5s;
+}
+
+#modal .display-section {
+    margin: 28px 32px 18px 32px;
+    padding: 18px 22px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(74,111,165,0.06);
 }
 
 .close:hover {
@@ -284,4 +513,327 @@ select#llm-model {
 
 #editButton:hover {
     background-color: #3a5a80;
+    box-shadow: 0 4px 16px rgba(74,111,165,0.12);
+}
+
+.display-section {
+    margin: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.display-section h2 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 18px;
+}
+
+.code-block {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+#translationModal .modal-content {
+    width: 92%;
+    max-width: 900px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(74,111,165,0.18);
+    padding: 0;
+    overflow: visible;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+#translationModal .close {
+    position: absolute;
+    right: 24px;
+    top: 22px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#translationModal .close:hover {
+    opacity: 1;
+}
+#translationModal .next-step {
+    position: absolute;
+    right: 104px; /* 放在 reload 左侧 */
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#translationModal .next-step:hover {
+    opacity: 1;
+    transform: translateX(4px);
+    transition: opacity 0.2s, transform 0.3s;
+}
+#translationModal .reload {
+    position: absolute;
+    right: 64px; /* 放在关闭按钮左侧 */
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#translationModal .reload:hover {
+    opacity: 1;
+    transform: rotate(180deg);
+    transition: opacity 0.2s, transform 0.5s;
+}
+#translationModal .display-section {
+    margin: 28px 32px 18px 32px;
+    padding: 18px 22px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(74,111,165,0.06);
+}
+#translationModal h2 {
+    margin-bottom: 12px;
+    color: #4a6fa5;
+    font-size: 20px;
+    font-weight: 600;
+}
+#translationModal .code-block {
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    color: #222;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.04);
+}
+#translationModal .test-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+#translationModal .test-result {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.06);
+    padding: 14px 18px;
+    margin-bottom: 0;
+}
+#translationModal .test-result h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #4a6fa5;
+    font-weight: 500;
+}
+#translationModal .case-input {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+#translationModal .case-result {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+#translationModal .case-result.success {
+    background: #e6f7e6;
+    color: #2e7d32;
+    border: 1px solid #b2dfdb;
+}
+#translationModal .case-result.error {
+    background: #ffeaea;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+#repairModal .modal-content {
+    width: 92%;
+    max-width: 900px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(74,111,165,0.18);
+    padding: 0;
+    overflow: visible;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+#repairModal .close {
+    position: absolute;
+    right: 24px;
+    top: 22px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#repairModal .close:hover {
+    opacity: 1;
+}
+#repairModal .next-step {
+    position: absolute;
+    right: 104px;
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#repairModal .next-step:hover {
+    opacity: 1;
+    transform: translateX(4px);
+    transition: opacity 0.2s, transform 0.3s;
+}
+#repairModal .reload {
+    position: absolute;
+    right: 64px;
+    top: 18px;
+    color: #4a6fa5;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+#repairModal .reload:hover {
+    opacity: 1;
+    transform: rotate(180deg);
+    transition: opacity 0.2s, transform 0.5s;
+}
+#repairModal .display-section {
+    margin: 28px 32px 18px 32px;
+    padding: 18px 22px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(74,111,165,0.06);
+    max-height: 35vh;
+    overflow-y: auto;
+}
+#repairModal h2 {
+    margin-bottom: 12px;
+    color: #4a6fa5;
+    font-size: 20px;
+    font-weight: 600;
+}
+#repairModal .code-block {
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    color: #222;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.04);
+}
+#repairModal .test-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+#repairModal .test-result {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.06);
+    padding: 14px 18px;
+    margin-bottom: 0;
+}
+#repairModal .test-result h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #4a6fa5;
+    font-weight: 500;
+}
+#repairModal .case-input {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+#repairModal .case-result {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+#repairModal .case-result.success {
+    background: #e6f7e6;
+    color: #2e7d32;
+    border: 1px solid #b2dfdb;
+}
+#repairModal .case-result.error {
+    background: #ffeaea;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+@media (max-width: 900px) {
+    #repairModal .modal-content {
+        width: 99%;
+        max-width: 99vw;
+    }
+    #repairModal .display-section {
+        margin: 12px 4vw 10px 4vw;
+        padding: 10px 6px;
+    }
+}
+
+/* 加载动画样式 */
+.loading-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ff4081;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

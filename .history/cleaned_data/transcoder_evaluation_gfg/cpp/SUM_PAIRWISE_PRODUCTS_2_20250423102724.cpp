@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long long int f_gold ( int n ) {
   return n * ( n + 1 ) * ( n + 2 ) * ( 3 * n + 1 ) / 24;

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNITRANS</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部翻译类型选项卡 -->
+        <div class="translation-types">
+            <div class="type-item active">
+                <div class="icon">📄</div>
+                <div class="type-info">
+                    <div class="type-title">Test Case Generation Phase</div>
+                    <div class="type-desc">generate inputs with LLMs and collect test cases</div>
+                </div>
+            </div>
+            <div class="type-item">
+                <div class="icon">📑</div>
+                <div class="type-info">
+                    <div class="type-title">Translation Augmentation Phase</div>
+                    <div class="type-desc"></div>
+                </div>
+            </div>
+            <div class="type-item">
+                <div class="icon">📝</div>
+                <div class="type-info">
+                    <div class="type-title">Translation Repair Phase</div>
+                    <div class="type-desc"></div>
+                </div>
+            </div>
+            <!-- <div class="type-item">
+                <div class="icon">🖼️</div>
+                <div class="type-info">
+                    <div class="type-title">翻译图片</div>
+                    <div class="type-desc">检测图片中的内容</div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧输入区域 -->
+            <div class="input-section">
+                <div class="language-selector">
+                    <div class="source-language">
+                        <select name="source-lang" id="source-lang">
+                            <option value="cpp">C++</option>
+                            <option value="python" selected>Python</option>
+                            <option value="java">Java</option>
+                        </select>
+                    </div>
+                    <div class="swap-icon">↔</div>
+                    <div class="target-language">
+                        <select name="target-lang" id="target-lang">
+                            <option value="cpp" selected>C++</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <textarea placeholder="输入"></textarea>
+                    <div class="input-actions">
+                        <button class="translate-btn">翻译</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧翻译结果区域 -->
+            <div class="results-section">
+                <div class="language-selector">
+                    <div class="source-language">
+                        <select name="llm-model" id="llm-model">
+                            <option value="deepseek" selected>DeepSeek</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <textarea placeholder="输出" readonly></textarea>
+                    <div class="input-actions">
+                        <button class="copy-btn">复制</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 测试用例弹窗 -->
+    <div id="model" class="modal">
+        <div class="modal-content">
+            <div id="modal-message"></div>
+            <div class="modal-footer">
+                <button id="editButton" class="edit-btn">保存</button>
+            </div>
+        </div>
+    </div>
+
+       <!-- 翻译结果弹窗 -->
+       <div id="translationModal" class="modal">
+        <div class="modal-content">
+            <span class="reload">&#x21bb;</span>
+            <span class="next-step">&#8594;</span>
+            <span class="close">&#x2716;</span>
+            <div class="display-section">
+                <h2>翻译结果:</h2>
+                <pre id="programCode" class="code-block"></pre>
+            </div>
+
+            <div class="display-section">
+                <h2>测试用例运行结果:</h2>
+                <div id="testCases" class="test-cases"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 翻译修复弹窗 -->
+    <div id="repairModal" class="modal">
+        <div class="modal-content">
+            <span class="reload">&#x21bb;</span>
+            <span class="next-step">&#8594;</span>
+            <span class="close">&#x2716;</span>
+            <div class="display-section">
+                <h2>翻译修复:</h2>
+                <pre id="repairProgramCode" class="code-block"></pre>
+            </div>
+            <div class="display-section">
+                <h2>调试信息:</h2>
+                <div id="repairTestCases" class="test-cases"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../static/script.js"></script>
+</body>
+</html>

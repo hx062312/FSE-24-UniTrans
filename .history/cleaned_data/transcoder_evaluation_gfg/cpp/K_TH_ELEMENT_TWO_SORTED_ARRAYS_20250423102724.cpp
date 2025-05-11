@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int arr1 [ ], int arr2 [ ], int m, int n, int k ) {
   int sorted1 [ m + n ];

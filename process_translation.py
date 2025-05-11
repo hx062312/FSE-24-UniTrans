@@ -304,32 +304,3 @@ if __name__ == "__main__":
         assert False, "unknown lang!"
 
 
-    # raw_file = f"testable_{src_lang}_{dst_lang}{suffix}.jsonl"
-    # if dst_lang == "python":
-    #     post_process_python(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif dst_lang == "java":
-    #     post_process_java(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif dst_lang == "cpp":
-    #     post_process_cpp(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif dst_lang == "c#":
-    #     pass
-    # else:
-    #     assert False, "unknown lang!"
-    # 改成
-        # raw_file = f"testable_{src_lang}_{dst_lang}{suffix}.jsonl"
-    # if src_lang == "python":
-    #     post_process_python(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif src_lang == "java":
-    #     post_process_java(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif src_lang == "cpp":
-    #     post_process_cpp(model, raw_file, suffix)
-    #     formulate_scripts(model, src_lang=src_lang, dst_lang=dst_lang, file=raw_file, suffix=suffix)
-    # elif src_lang == "c#":
-    #     pass
-    # else:
-    #     assert False, "unknown lang!"

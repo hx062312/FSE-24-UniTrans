@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long long f_gold ( long long a, long long b, long long mod ) {
   long long res = 0;

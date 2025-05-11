@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int arr [ ], int i, int n ) {
   if ( i > ( n - 2 ) / 2 ) return true;

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 float f_gold ( float r1, float r2, float r3 ) {
   float pi = 3.14;

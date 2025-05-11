@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 void f_gold ( int arr [ ], int l, int h ) {
   if ( l >= h ) return;

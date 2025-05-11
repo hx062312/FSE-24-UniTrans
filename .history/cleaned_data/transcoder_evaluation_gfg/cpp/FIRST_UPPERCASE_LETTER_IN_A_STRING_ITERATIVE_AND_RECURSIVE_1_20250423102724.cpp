@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 char f_gold ( string str, int i = 0 ) {
   if ( str [ i ] == '\0' ) return 0;

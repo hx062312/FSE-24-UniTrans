@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 void f_gold ( int arr [ ], int n, int A, int B, int C ) {
   for ( int i = 0;

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 string f_gold ( string s, char c1, char c2 ) {
   int l = s . length ( );

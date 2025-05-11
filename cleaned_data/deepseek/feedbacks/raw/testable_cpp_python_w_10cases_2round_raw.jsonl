@@ -1,1 +1,1 @@
-{"id": 0, "feedbacks": [["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"], ["", "OK"]]}
+{"id": 0, "feedbacks": [["Inputs:\ns = \"abcde\"\nOutputs:\n\"abcde\"", "OK"], ["Inputs:\ns = \"aab\"\nOutputs:\n\"acb\"", "OK"], ["Inputs:\ns = \"aaaaa\"\nOutputs:\n\"ababa\"", "OK"]]}

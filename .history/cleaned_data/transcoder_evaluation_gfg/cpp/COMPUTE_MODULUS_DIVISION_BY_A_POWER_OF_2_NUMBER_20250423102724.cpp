@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 unsigned int f_gold ( unsigned int n, unsigned int d ) {
   return ( n & ( d - 1 ) );

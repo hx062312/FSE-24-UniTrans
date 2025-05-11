@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int n, int m, int k ) {
   if ( m <= n - k + 1 ) return m + k - 1;

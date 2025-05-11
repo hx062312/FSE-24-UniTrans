@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int x ) {
   return ( ( x & 0x0F ) << 4 | ( x & 0xF0 ) >> 4 );

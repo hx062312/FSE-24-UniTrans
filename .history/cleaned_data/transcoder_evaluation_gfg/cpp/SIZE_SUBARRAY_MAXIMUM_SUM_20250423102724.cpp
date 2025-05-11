@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( int a [ ], int size ) {
   int max_so_far = INT_MIN, max_ending_here = 0, start = 0, end = 0, s = 0;

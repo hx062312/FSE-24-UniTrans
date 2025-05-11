@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 int f_gold ( char symb [ ], char oper [ ], int n ) {
   int F [ n ] [ n ], T [ n ] [ n ];

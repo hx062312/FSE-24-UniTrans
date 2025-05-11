@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long long int f_gold ( int n ) {
   long long int multiTerms = n * ( n + 1 ) / 2;

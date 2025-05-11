@@ -1,1 +1,0 @@
-{"id": 0, "cpp": ["int addOne(int x) {\n    int m = 1;\n    while (x & m) {\n        x = x ^ m;\n        m <<= 1;\n    }\n    x = x ^ m;\n    return x;\n}\n"]}

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( char str1 [ ], char str2 [ ], int m, int n ) {
   if ( m == 0 ) return true;

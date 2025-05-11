@@ -150,7 +150,7 @@ def fetch_exe_ret_py(target_file, out_file, test_case_file, test_case_num, timeo
             if sub_correct == len(test_cases):
                 correct += 1
             # assert False
-            with jsonlines.open(out_file, "a") as fw:
+            with jsonlines.open(out_file, "w") as fw:
                 fw.write({"id":id, "feedbacks": cases_errs})
     print(f"pass rate: {correct / count}, {correct}, {count}")
 
@@ -329,7 +329,7 @@ def fetch_exe_ret_ja(target_file, out_file, test_case_file, test_case_num, timeo
                     cases_errs.append((pair, result[0]))
             if sub_correct == len(test_cases):
                 correct += 1
-            with jsonlines.open(out_file, "a") as fw:
+            with jsonlines.open(out_file, "w") as fw:
                 fw.write({"id": id, "feedbacks": cases_errs})
     print(f"pass rate: {correct / count}, {correct}, {count}")
 

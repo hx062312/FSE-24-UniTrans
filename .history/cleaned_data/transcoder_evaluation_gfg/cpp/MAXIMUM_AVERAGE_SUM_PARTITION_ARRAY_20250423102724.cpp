@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 double f_gold ( vector < int > & A, int K ) {
   int n = A . size ( );

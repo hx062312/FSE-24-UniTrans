@@ -1,1 +1,1 @@
-{"id": 0, "test_case": []}
+{"id": 0, "test_case": ["Inputs:\nA = {1, 2, 3, 4, 5, 6, 7}\nK = 4\nOutputs:\n20.5", "Inputs:\nA = {10, 20, 30, 40, 50}\nK = 2\nOutputs:\n75.0", "Inputs:\nA = {9, 1, 2, 3, 9}\nK = 3\nOutputs:\n20.0"]}

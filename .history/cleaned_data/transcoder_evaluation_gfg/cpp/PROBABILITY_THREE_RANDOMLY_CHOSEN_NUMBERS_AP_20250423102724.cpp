@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 double f_gold ( int n ) {
   return ( 3.0 * n ) / ( 4.0 * ( n * n ) - 1 );

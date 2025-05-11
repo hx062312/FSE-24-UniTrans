@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 
 //TO_FILL_FUNC

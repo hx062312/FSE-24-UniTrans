@@ -5,26 +5,29 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 
-int addOne ( int x ) {
-  int m = 1;
-  while ( x & m ) {
-    x = x ^ m;
-    m <<= 1;
+string noAdjacentDup ( string s ) {
+  int n = s . length ( );
+  for ( int i = 1;
+  i < n;
+  i ++ ) {
+    if ( s [ i ] == s [ i - 1 ] ) {
+      s [ i ] = 'a';
+      while ( s [ i ] == s [ i - 1 ] || ( i + 1 < n && s [ i ] == s [ i + 1 ] ) ) s [ i ] ++;
+      i ++;
+    }
   }
-  x = x ^ m;
-  return x;
-
+  return s;
+}
 
 
 int main() {
 
 try {
-int x = 5;
-int x = 0;
-int x = -1;
-cout <<addOne(x);
+string s = "abcde";
+cout <<noAdjacentDup(s);
 }catch(...){cout <<"exception";}
 
 

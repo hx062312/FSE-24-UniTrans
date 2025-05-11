@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int r, int R, int r1, int x1, int y1 ) {
   int dis = sqrt ( x1 * x1 + y1 * y1 );

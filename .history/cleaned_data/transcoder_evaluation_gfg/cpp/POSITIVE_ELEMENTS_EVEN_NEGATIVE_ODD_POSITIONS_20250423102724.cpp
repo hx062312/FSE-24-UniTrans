@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 void f_gold ( int a [ ], int size ) {
   int positive = 0, negative = 1;

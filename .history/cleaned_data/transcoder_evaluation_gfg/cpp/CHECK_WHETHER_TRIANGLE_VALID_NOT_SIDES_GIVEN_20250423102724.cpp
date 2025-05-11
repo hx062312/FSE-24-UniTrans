@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int a, int b, int c ) {
   if ( a + b <= c || a + c <= b || b + c <= a ) return false;

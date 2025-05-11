@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long long int f_gold ( long long int y, long long int x ) {
   if ( log2 ( y ) < x ) return y;

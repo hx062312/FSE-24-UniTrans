@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 bool f_gold ( int set [ ], int n, int sum ) {
   bool subset [ n + 1 ] [ sum + 1 ];

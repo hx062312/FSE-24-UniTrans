@@ -1,3 +1,5 @@
+# python process_feedbacks.py --src_lang {source_lang} --dst_lang {target_lang} --round {round_num} --test_case_num {test_case_num}
+# python process_feedbacks.py --src_lang python --dst_lang java --round 2 --test_case_num 10
 import json
 import re
 import jsonlines
@@ -242,6 +244,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--src_lang", type=str, help="source language", default="java")
     parser.add_argument("--dst_lang", type=str, help="target language", default="python")
+    parser.add_argument("--model", type=str, help="model name", default="deepseek")
     parser.add_argument("--round", type=int, help="number of round", default=1)
     parser.add_argument("--test_case_num", type=int, help="num of test cases", default=3)
     args = parser.parse_args()
@@ -254,7 +257,7 @@ if __name__ == "__main__":
     feedback_file = f"./cleaned_data/{model}/feedbacks/raw/testable_{src_lang}_{dst_lang}_w_{test_case_num}cases_{round}round_raw.jsonl"
     output_file = f"./cleaned_data/{model}/feedbacks/testable_{src_lang}_{dst_lang}_w_{test_case_num}cases_{round}round.jsonl"
     # todo
-    sample_file = f"./cleaned_data/{model}/post_processed_w_{test_case_num}cases/testable_{src_lang}_{dst_lang}_w_{test_case_num}cases.jsonl"
+    sample_file = f"./cleaned_data/{model}/post_processed/testable_{src_lang}_{dst_lang}_w_{test_case_num}cases_{round}round.jsonl"
     if dst_lang == "python":
         process_py_feed_backs(feedback_file, output_file, sample_file)
     elif dst_lang == "java":

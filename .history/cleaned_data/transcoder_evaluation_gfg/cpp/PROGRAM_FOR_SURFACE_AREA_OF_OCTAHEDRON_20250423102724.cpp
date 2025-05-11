@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 double f_gold ( double side ) {
   return ( 2 * ( sqrt ( 3 ) ) * ( side * side ) );

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 // #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 long long f_gold ( int n ) {
   int dp [ n + 1 ] [ 10 ];
