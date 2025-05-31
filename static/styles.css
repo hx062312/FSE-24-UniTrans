@@ -63,22 +63,28 @@ body {
 }
 
 .type-help {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-left: 6px;
     border-radius: 50%;
-    background: #e0e0e0;
-    color: #333;
+    background: none;
+    color: #bbb;
     text-align: center;
-    line-height: 22px;
-    font-size: 16px;
+    line-height: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: none;
     cursor: pointer;
     vertical-align: middle;
-    transition: background 0.2s;
+    border: none;
+    transition: color 0.2s, transform 0.2s;
 }
 .type-help:hover {
-    background: #bdbdbd;
+    color: #888;
+    transform: scale(1.08);
 }
 
 /* 主要内容区域 */

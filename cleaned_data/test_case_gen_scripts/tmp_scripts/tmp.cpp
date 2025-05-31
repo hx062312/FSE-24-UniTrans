@@ -8,26 +8,20 @@
 #include <algorithm>
 using namespace std;
 
-string noAdjacentDup ( string s ) {
-  int n = s . length ( );
-  for ( int i = 1;
-  i < n;
-  i ++ ) {
-    if ( s [ i ] == s [ i - 1 ] ) {
-      s [ i ] = 'a';
-      while ( s [ i ] == s [ i - 1 ] || ( i + 1 < n && s [ i ] == s [ i + 1 ] ) ) s [ i ] ++;
-      i ++;
-    }
-  }
-  return s;
+bool isPower ( int x, int y ) {
+  if ( x == 1 ) return ( y == 1 );
+  long int pow = 1;
+  while ( pow < y ) pow *= x;
+  return ( pow == y );
 }
 
 
 int main() {
 
 try {
-string s = "abcde";
-cout <<noAdjacentDup(s);
+int x = 2;
+int y = 1;
+cout <<isPower(x,y);
 }catch(...){cout <<"exception";}
 
 

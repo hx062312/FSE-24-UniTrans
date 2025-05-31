@@ -1,71 +1,85 @@
-## Exploring and Unleashing the Power of Large Language Models in Automated Code Translation
+# Exploring and Unleashing the Power of Large Language Models in Automated Code Translation
 
-### Preparation
-````commandline
+## Preparation
+
+```commandline
 jdk17
-javafx-sdk-20 refer to https://openjfx.io/openjfx-docs/#introduction
+python 3.9.21
+flask 3.1.0
+openai 1.60.1
+javafx-sdk-20  # 参考 https://openjfx.io/openjfx-docs/#introduction
 Stack BackTrace for C++: https://github.com/NEWPLAN/newplan_toolkit/backtrace
-EMMA Coverage Tool: https://emma.sourceforge.net/
-transformers == 4.30.2
-torch == 1.12.1
-````
+```
 
-### Attachments
-- Please find the data noise breakdown here: ![img.png](figures/img.png)
-- Please find the tmp.java file here: [tmp.pdf](figures%2Ftmp.pdf).  
-- Please find the statistical test results here: [statistical test.pdf](figures%2Fstatistical%20test.pdf).
-- Please find the OJ experimental results in the folder ```oj_samples```, which is reported in the threats to validity section.  
+## Quick Start
 
-### Cleaned Dataset
-- ```./cleaned_data/testable_samples.jsonl```: cleaned dataset used in this work, including parallel functions of Java, Python, and C++.  
-- ```./cleaned_data/transcoder_evaluation_gfg```: test cases associated with the cleaned dataset.
+### 1. 环境激活与程序输入
 
-### Quick Start 
+- **激活 Flask 环境**
 
-- Test Case Generation Phase
-  1. generate inputs with LLMs  (taking GPT3.5 as an example)
-  ```commandline
-    python gpt3_5.py --dst_lang ${dst_lang} --obj 0 --k ${test_case_num} --k ${sample_k}
-    ``` 
-  2. collect test cases
-  ```commandline
-    python process_valid_inputs.py --model ${model_name} --dst_lang ${dst_lang}
-  ```
+  ![](./assets/2025-05-31-13.54.40.png)
 
-- Translation Augmentation Phase
-  1. translation augmentation (taking GPT3.5 as an example)
-  ```commandline
-    python gpt3_5.py --src_lang ${src_lang} --dst_lang ${dst_lang} --obj 3 --k ${sample_k} --test_case_num ${test_case_num}  
-  ```
-  2. post-process translated programs.
-  ```commandline
-    python process_translation.py --src_lang ${src_lang} --dst_lang ${dst_lang} --suffix ${suffix}
-  ```
-  3. translation evaluation
-  ```commandline
-    python fetch_feedbacks.py --model ${model_name} --src_lang ${src_lang} --dst_lang ${dst_lang} --test_case_num ${test_case_num} round ${round}
-  ```
+- **输入待翻译程序，选择源语言和目标语言**
 
-- Translation Repair Phase  
-  1. error info analysis
-  ```commandline
-    python process_feedbacks.py --src_lang ${src_lang} --dst_lang ${dst_lang} --round ${round} --test_case_num ${test_case_num}  
-  ```
-  2. program repair
-  ```commandline
-    python gpt3_5.py --src_lang ${src_lang} --dst_lang ${dst_lang} --obj 4 --k ${sample_k} --test_case_num ${test_case_num} 
-  ```
-  3. post-process repaired programs.
-  ```commandline
-   python process_translation.py --src_lang ${src_lang} --dst_lang ${dst_lang} --suffix ${suffix}
-  ```
+  ![](./assets/2025-05-31-13.42.10.png)
 
-- Evaluation
-  1. evaluation for computational accuracy
-  ````commandline
-    python evaluation_CA.py --model ${model_name} --src_lang ${src_lang} --dst_lang ${dst_lang} --k ${CA@k} --timeout ${timeout} --suffix ${suffix}
-    ````
-  2. evaluation for exact match accuracy
-  ````commandline
-    python evaluation_EM.py --model ${model_name} --src_lang ${src_lang} --dst_lang ${dst_lang} --suffix ${suffix}
-    ````
+### 2. 测试用例生成阶段
+
+- 点击“翻译”按钮，自动生成测试用例(若测试用例生成失败，可点击右上角 ↻ 重新生成)
+
+  ![](./assets/2025-05-31-13.05.28.png)
+
+- 可根据目标语言手动修改生成的测试用例
+
+  - **Python 测试用例格式示例：**
+    ```
+    Inputs:
+    Variable1 = Data1
+    Variable2 = Data2
+    ...
+    Outputs:
+    result1
+    result2
+    ...
+    ```
+  - **C++/Java 测试用例格式示例：**
+    ```
+    Inputs:
+    type variable1 = value1 ;
+    type variable2 = value2 ;
+    ...
+    Outputs (return_type):
+    result1
+    result2
+    ...
+    ```
+
+- 手动修改后的测试用例示意：
+
+  ![](./assets/2025-05-31-13.07.22.png)
+
+### 3. 翻译增强阶段
+
+- 点击右上角 → 进行翻译增强
+
+  ![](./assets/2025-05-31-13.07.47.png)
+
+- 检查翻译程序是否通过所有测试用例
+
+  ![](./assets/2025-05-31-14.15.15.png)
+
+- 若全部通过，点击右上角 ✖ 结束翻译；如有未通过的测试用例，进入下一步
+
+### 4. 翻译修复阶段
+
+- 点击右上角 → 进行翻译修复
+
+  ![](./assets/2025-05-31-13.08.35.png)
+
+- 在翻译修复界面可查看修复后的代码及测试用例结果。对于仍未通过的用例，可多次点击 ↻ 进行修复
+
+- 若修复通过，点击右上角 ✖ 结束翻译。
+
+  ![](./assets/2025-05-31-13.08.48.png)
+
+---

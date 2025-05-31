@@ -1,1 +1,1 @@
-{"id": 0, "python": ["def noAdjacentDup(s):\n    n = len(s)\n    s = list(s)\n    i = 1\n    while i < n:\n        if s[i] == s[i - 1]:\n            s[i] = 'a'\n            while s[i] == s[i - 1] or (i + 1 < n and s[i] == s[i + 1]):\n                s[i] = chr(ord(s[i]) + 1)\n            i += 1\n        i += 1\n    return ''.join(s)"]}
+{"id": 0, "python": ["def isPower(x, y):\n    if x == 1:\n        return y == 1\n    pow = 1\n    while pow < y:\n        pow *= x\n    return pow == y"]}
