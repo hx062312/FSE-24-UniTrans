@@ -8,13 +8,12 @@
 #include <algorithm>
 using namespace std;
 
-//TO_FILL_FUNC
+// TO_FILL_FUNC
 
+int main()
+{
 
-int main() {
-
-//TO_FILL_EXEC
-
+    // TO_FILL_EXEC
 
     return 0;
 }

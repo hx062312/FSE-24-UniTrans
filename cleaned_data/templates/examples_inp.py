@@ -1,4 +1,4 @@
-example_cpp = "int search(int arr[], int n, int x) {\n    int i = 0;\n    for (i = 0; i < n; i++) {\n        if (arr[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nplease generate ten groups of differentiated valid inputs for the above focal method of cpp language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."
+example_cpp = "int search(int arr[], int n, int x) {\n    int i = 0;\n    for (i = 0; i < n; i++) {\n        if (arr[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nplease generate three groups of differentiated valid inputs for the above focal method of cpp language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."
 valid_inputs_cpp = """Input_1:
 int arr[] = {1, 2, 3, 4, 5};
 int n = 5;
@@ -58,7 +58,7 @@ example_java = """static int minDiff ( int arr [ ] , int n , int k ) {
   i ++ ) result = Math . min ( result , arr [ i + k - 1 ] - arr [ i ] ) ;
   return result ;
 }
-please generate ten groups of differentiated valid inputs for the above focal method of java language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."""
+please generate three groups of differentiated valid inputs for the above focal method of java language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."""
 
 valid_inputs_java = """Input_1:
 int[] arr = {1, 3, 7, 9, 11};
@@ -118,7 +118,7 @@ example_python = """def minDiff ( arr , n , k ) :
     for i in range ( n - k + 1 ) :
         result = int ( min ( result , arr [ i + k - 1 ] - arr [ i ] ) )
     return result
-please generate ten groups of differentiated valid inputs for the above focal method of python language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."""
+please generate three groups of differentiated valid inputs for the above focal method of python language, in the format of [Input_1]\\n[Input_2]\\n...[Input_10]. Finally, use END_OF_CASE to finish your answer."""
 
 valid_inputs_python = """Input_1:
 arr = [1, 3, 7, 9, 11]

@@ -1,0 +1,1 @@
+{"id": 0, "feedbacks": [["Inputs:\nint x=-3;\nOutputs (int):\n-2", "OK"], ["Inputs:\nint x=0;\nOutputs (int):\n1", "OK"], ["Inputs:\nint x=5;\nOutputs (int):\n6", "OK"]]}

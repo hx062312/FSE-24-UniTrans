@@ -1,1 +1,1 @@
-{"id": 0, "test_case": ["Inputs:\nint a = -3;\nint b = 7;\nint x = 1;\nOutputs (int):\n7", "Inputs:\nint a = 0;\nint b = 0;\nint x = 0;\nOutputs (int):\n0", "Inputs:\nint a = 5;\nint b = 10;\nint x = 0;\nOutputs (int):\n5"]}
+{"id": 0, "test_case": ["Inputs:\nx=0\nOutputs:\n1", "Inputs:\nx=-3\nOutputs:\n-2", "Inputs:\nx=5\nOutputs:\n6"]}

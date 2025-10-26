@@ -1,1 +1,1 @@
-{"id": 0, "test_case": []}
+{"id": 0, "test_case": ["Inputs:\nint x=-3;\nOutputs (int):\n-2", "Inputs:\nint x=0;\nOutputs (int):\n1", "Inputs:\nint x=5;\nOutputs (int):\n6"]}

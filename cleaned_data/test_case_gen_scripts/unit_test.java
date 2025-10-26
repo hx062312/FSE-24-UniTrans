@@ -1,23 +1,23 @@
 import java.util.*;
 import java.util.stream.*;
 import java.lang.*;
-public class BASIC_AND_EXTENDED_EUCLIDEAN_ALGORITHMS{
 
+public class BASIC_AND_EXTENDED_EUCLIDEAN_ALGORITHMS {
 
-// TO_FILL_FUNC
+    // TO_FILL_FUNC
 
-public static void main(String args[]) {
-    try{
+    public static void main(String args[]) {
+        try {
 
-        // EXP_OUT
+            // EXP_OUT
 
-        // ACT_OUT
+            // ACT_OUT
 
-        // COMPARE
+            // COMPARE
 
-    }catch(Exception e){
-        System.out.print("Runtime Error:");
-        e.printStackTrace();
+        } catch (Exception e) {
+            System.out.print("Runtime Error:");
+            e.printStackTrace();
+        }
     }
-}
 }

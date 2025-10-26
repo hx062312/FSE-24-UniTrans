@@ -1,1 +1,1 @@
-{"id": 0, "cpp": ["Input_1:\nint x = 2;\nint y = 8;\n\nInput_2:\nint x = 3;\nint y = 9;\n\nInput_3:\nint x = 5;\nint y = 125;\n\nInput_4:\nint x = 10;\nint y = 1000;\n\nInput_5:\nint x = 2;\nint y = 10;\n\nInput_6:\nint x = 1;\nint y = 1;\n\nInput_7:\nint x = 4;\nint y = 64;\n\nInput_8:\nint x = 7;\nint y = 343;\n\nInput_9:\nint x = 6;\nint y = 36;\n\nInput_10:\nint x = 2;\nint y = 1;"]}
+{"id": 0, "cpp": ["Input_1:\nint a = 5;\nint b = 3;\n\nInput_2:\nint a = -2;\nint b = 7;\n\nInput_3:\nint a = 0;\nint b = 0;"]}

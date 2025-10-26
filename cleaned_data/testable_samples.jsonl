@@ -1,1 +1,1 @@
-{"id": 0, "cpp": "bool isPower ( int x, int y ) {\n  if ( x == 1 ) return ( y == 1 );\n  long int pow = 1;\n  while ( pow < y ) pow *= x;\n  return ( pow == y );\n}"}
+{"id": 0, "java": "a\n"}

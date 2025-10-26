@@ -10,24 +10,19 @@ import numpy as np
 import array
 import traceback
 
-def isPower(x, y):
-    if x == 1:
-        return y == 1
-    pow = 1
-    while pow < y:
-        pow *= x
-    return pow == y
+def add(a, b):
+    return a + b
 
 
 if __name__ == '__main__':
     try:
-        exp_out = 1
+        exp_out = 8
 
-        x = 5
+        a = 5
 
-        y = 125
+        b = 3
 
-        act_out = isPower(x = 5,y = 125)
+        act_out = add(a = 5,b = 3)
 
         if isinstance(exp_out, float) or isinstance(act_out, float):
             if abs(exp_out - act_out) < 1e-3:

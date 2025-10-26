@@ -10,18 +10,21 @@ using namespace std;
 
 // TO_FILL_FUNC
 
-
-int main() {
-    try {
+int main()
+{
+    try
+    {
 
         // EXP_OUT
 
         // ACT_OUT
 
         // COMPARE
-
-    }catch (std::exception const& e) {
-        std::cout << "Runtime Error:\n" << e.what() << std::endl;
+    }
+    catch (std::exception const &e)
+    {
+        std::cout << "Runtime Error:\n"
+                  << e.what() << std::endl;
     }
     return 0;
 }
