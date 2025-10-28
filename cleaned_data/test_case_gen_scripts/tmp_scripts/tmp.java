@@ -4,20 +4,35 @@ import java.lang.*;
 
 public class BASIC_AND_EXTENDED_EUCLIDEAN_ALGORITHMS {
 
-int add(int a,int b){
-return a+b;
+static int gcd(int a, int b) {
+    if (a == 0) {
+        return b;
+    }
+    return gcd(b % a, a);
 }
+
 
     public static void main(String args[]) {
         try {
-int[] arr = {-2, 0, 2, 4, 6, 8, 10};
-int n = 7;
-int k = 5;
-System.out.println(add(a,b));
-System.out.flush();
-}catch(Exception e){System.out.println("exception");
-System.out.flush();}
 
+            int exp_out = 1;
 
+            int a = 17;
+
+            int b = 13;
+
+            int act_out = gcd(a,b);
+
+            if(act_out == exp_out) System.out.println("OK");
+
+            else {
+System.out.print("Expected Output:1\nActual Output:");
+System.out.print(act_out);
+System.out.print("\nExpected output and actual output are not equal!");}
+
+        } catch (Exception e) {
+            System.out.print("Runtime Error:");
+            e.printStackTrace();
+        }
     }
 }

@@ -1,1 +1,1 @@
-{"id": 0, "java": "a\n"}
+{"id": 0, "python": "def gcd ( a , b ) :\n    if a == 0 :\n        return b\n    return gcd ( b % a , a )"}

@@ -197,7 +197,34 @@ document.addEventListener("DOMContentLoaded", function () {
       const testCaseData = { ...sourceData, step: "test_case_generation" };
       const testCaseResult = await postData("/", testCaseData);
       if (testCaseResult.success && testCaseResult.test_cases) {
-        let content = `<div class="modal-header">测试用例</div><div class="test-cases">`;
+        let content = `<div class="modal-header">测试用例</div>
+        <div class="format-info">
+          <div class="format-section">
+            <h4>Python 测试用例格式：</h4>
+            <pre>
+Inputs:
+Variable1 = Data1
+Variable2 = Data2
+...
+Outputs:
+result1
+result2
+...</pre>
+          </div>
+          <div class="format-section">
+            <h4>C++/Java 测试用例格式：</h4>
+            <pre>
+Inputs:
+type variable1 = value1 ;
+type variable2 = value2 ;
+...
+Outputs (return_type):
+result1
+result2
+...</pre>
+          </div>
+        </div>
+        <div class="test-cases">`;
         testCaseResult.test_cases.forEach((testCase, idx) => {
           content += `<div class="test-case"><strong>用例 ${
             idx + 1
